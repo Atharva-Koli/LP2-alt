@@ -1,0 +1,25 @@
+def job_scheduling:
+	n=int(input('Enter number of jobs:'))
+	jobs = []
+	for I in range(n):
+		deadline,profit = map(int,input(f"Enter deadline and profit for job {i+1}:").spilt())
+		jobs.append((deadline,profit))
+	jobs.sort(key=lambda x:x[1],reverse=True)
+	max_deadline = max(job[0] for job in jobs)
+    	slots = [-1] * max_deadline
+    	total_profit = 0
+    	count_jobs = 0
+	for deadline, profit in jobs:
+       	 for i in range(deadline - 1, -1, -1):
+            if slots[i] == -1:
+                slots[i] = profit
+                total_profit += profit
+                count_jobs += 1
+                break
+
+    	print(f"Total jobs scheduled: {count_jobs}")
+    	print(f"Total profit: {total_profit}")
+
+job_scheduling()
+
+
